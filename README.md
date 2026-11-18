@@ -15,7 +15,38 @@ Proyek ini dikembangkan sebagai solusi **Technical Case Test — Senior Programm
 
 ---
 
-## 2. Akun Demo Pengujian (6 Peran Wajib)
+## 2. Alur Kerja Sistem (End-to-End Workflow)
+
+Alur pelayanan rawat jalan pada sistem ini dirancang mengikuti standar operasional rumah sakit dengan sinkronisasi tagihan otomatis dan penguncian integritas data:
+
+````text
+[1. Pendaftaran & Antrean]
+         │  • Registrasi pasien baru / cari pasien lama (Auto-No. RM)
+         │  • Generate No. Registrasi, Kode Antrean Poli, & Tagihan Awal (Biaya Pendaftaran)
+         ▼
+[2. Pemeriksaan Dokter (EMR)]
+         │  • Dokter memilih pasien dari tab "Antrean"
+         │  • Input Anamnesis, Tanda Vital, Diagnosis, Tindakan Poliklinik, Order Lab, & Resep Elektronik
+         │  • Biaya Tindakan, Lab, & Obat otomatis masuk ke rincian tagihan (Billing) pasien
+         │  • Status kunjungan berpindah ke tab "Sudah Diperiksa" (masih bisa diedit selama belum lunas)
+         ▼
+[3. Pemeriksaan Laboratorium (Node.js Service)] ──(Jika ada Order Lab)──► Input Hasil Lab & Verifikasi
+         │
+         ▼
+[4. Kasir & Billing (Pelunasan Tagihan)]
+         │  • Kasir memverifikasi rincian terpadu (Pendaftaran + Tindakan + Lab + Obat)
+         │  • Proses pembayaran idempotent (Tunai / QRIS / Debit / Transfer / BPJS)
+         │  • Status tagihan menjadi LUNAS & tagihan terkunci (is_locked = true) agar medis tidak berubah
+         │  • Cetak Invoice / Kwitansi PDF dengan nama petugas kasir otomatis
+         │  • (Opsional) Fitur Koreksi Pembayaran untuk membuka kunci tagihan jika terjadi salah input
+         ▼
+[5. Instalasi Farmasi & Penyerahan Obat]
+            • Petugas Farmasi memverifikasi resep dengan indikator status pembayaran Kasir (LUNAS)
+            • Sistem menolak penyerahan obat jika tagihan pasien belum LUNAS
+            • Klik "Serahkan Obat" -> Status resep menjadi DISERAHKAN & stok gudang dipotong secara atomik (FOR UPDATE)
+---
+
+## 3. Akun Demo Pengujian (6 Peran Wajib)
 
 Seluruh akun bawaan pada `database/simrs.sql` menggunakan kata sandi yang sama: **`password123`**
 
@@ -30,7 +61,7 @@ Seluruh akun bawaan pada `database/simrs.sql` menggunakan kata sandi yang sama: 
 
 ---
 
-## 3. Panduan Instalasi & Menjalankan Sistem
+## 4. Panduan Instalasi & Menjalankan Sistem
 
 ### A. Database PostgreSQL 17
 
@@ -44,4 +75,4 @@ cd backend
 composer install
 # Sesuaikan koneksi database pada backend/config/db.php
 # Pastikan virtual host / Laravel Herd mengarah ke backend/web ([http://simrs-api.test](http://simrs-api.test))
-```
+````
