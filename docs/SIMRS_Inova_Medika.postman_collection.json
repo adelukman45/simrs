@@ -1,0 +1,862 @@
+{
+  "info": {
+    "name": "SIMRS Inova Medika — Rawat Jalan Terintegrasi",
+    "description": "Koleksi lengkap REST API Hybrid Backend (Yii2 Core & Node.js Service) mencakup seluruh modul CRUD (GET, POST, PUT, DELETE) dan alur klinis SIMRS Rawat Jalan.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{jwt_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "yii_url",
+      "value": "http://simrs-api.test",
+      "type": "string"
+    },
+    {
+      "key": "node_url",
+      "value": "http://127.0.0.1:3001/api",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01. Auth (6 Role Login)",
+      "item": [
+        {
+          "name": "Login Admin (Auto Set Token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.status === 'success' && res.data && res.data.token) {",
+                  "    pm.collectionVariables.set('jwt_token', res.data.token);",
+                  "    pm.environment.set('jwt_token', res.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{yii_url}}/auth/login",
+              "host": ["{{yii_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login Pendaftaran (daftar1)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.status === 'success' && res.data && res.data.token) {",
+                  "    pm.collectionVariables.set('jwt_token', res.data.token);",
+                  "    pm.environment.set('jwt_token', res.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"daftar1\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{yii_url}}/auth/login",
+              "host": ["{{yii_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login Dokter (dr_budi)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.status === 'success' && res.data && res.data.token) {",
+                  "    pm.collectionVariables.set('jwt_token', res.data.token);",
+                  "    pm.environment.set('jwt_token', res.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"dr_budi\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{yii_url}}/auth/login",
+              "host": ["{{yii_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login Laboratorium (lab1)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.status === 'success' && res.data && res.data.token) {",
+                  "    pm.collectionVariables.set('jwt_token', res.data.token);",
+                  "    pm.environment.set('jwt_token', res.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"lab1\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{yii_url}}/auth/login",
+              "host": ["{{yii_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login Farmasi (farmasi1)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.status === 'success' && res.data && res.data.token) {",
+                  "    pm.collectionVariables.set('jwt_token', res.data.token);",
+                  "    pm.environment.set('jwt_token', res.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"farmasi1\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{yii_url}}/auth/login",
+              "host": ["{{yii_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login Kasir (kasir1)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.status === 'success' && res.data && res.data.token) {",
+                  "    pm.collectionVariables.set('jwt_token', res.data.token);",
+                  "    pm.environment.set('jwt_token', res.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"kasir1\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{yii_url}}/auth/login",
+              "host": ["{{yii_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02. Master Data",
+      "item": [
+        {
+          "name": "Pasien",
+          "item": [
+            {
+              "name": "GET List & Cari Pasien",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{yii_url}}/master/pasien?q=&page=1&limit=20",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "pasien"],
+                  "query": [
+                    { "key": "q", "value": "" },
+                    { "key": "page", "value": "1" },
+                    { "key": "limit", "value": "20" }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "POST Tambah Pasien",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nik\": \"3273011505950009\",\n  \"nama_lengkap\": \"Rizky Pratama\",\n  \"tanggal_lahir\": \"1995-05-15\",\n  \"jenis_kelamin\": \"L\",\n  \"alamat\": \"Jl. Soekarno Hatta No. 120, Bandung\",\n  \"no_telepon\": \"081234567899\"\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/pasien",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "pasien"]
+                }
+              }
+            },
+            {
+              "name": "PUT Update Pasien",
+              "request": {
+                "method": "PUT",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"no_telepon\": \"081299998888\",\n  \"alamat\": \"Jl. Asia Afrika No. 45, Bandung\"\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/pasien/1",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "pasien", "1"]
+                }
+              }
+            },
+            {
+              "name": "DELETE Hapus Pasien",
+              "request": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{yii_url}}/master/pasien/99",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "pasien", "99"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Poliklinik",
+          "item": [
+            {
+              "name": "GET List Poliklinik",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{yii_url}}/master/poli",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "poli"]
+                }
+              }
+            },
+            {
+              "name": "POST Tambah Poliklinik",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kode_poli\": \"ANK\",\n  \"nama_poli\": \"Poliklinik Anak\",\n  \"biaya_pendaftaran\": 45000\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/poli",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "poli"]
+                }
+              }
+            },
+            {
+              "name": "PUT Update Poliklinik",
+              "request": {
+                "method": "PUT",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nama_poli\": \"Poliklinik Spesialis Anak\",\n  \"biaya_pendaftaran\": 50000\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/poli/4",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "poli", "4"]
+                }
+              }
+            },
+            {
+              "name": "DELETE Hapus Poliklinik",
+              "request": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{yii_url}}/master/poli/4",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "poli", "4"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Dokter & Jadwal",
+          "item": [
+            {
+              "name": "GET List Dokter",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{yii_url}}/master/dokter",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "dokter"]
+                }
+              }
+            },
+            {
+              "name": "POST Tambah Dokter",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"poli_id\": 1,\n  \"kode_dokter\": \"DOK-003\",\n  \"nama_dokter\": \"dr. Hendra Kusuma\",\n  \"spesialisasi\": \"Dokter Umum\",\n  \"no_str\": \"STR-33049586\"\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/dokter",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "dokter"]
+                }
+              }
+            },
+            {
+              "name": "PUT Update Dokter",
+              "request": {
+                "method": "PUT",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"spesialisasi\": \"Dokter Umum & Kesehatan Kerja\"\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/dokter/3",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "dokter", "3"]
+                }
+              }
+            },
+            {
+              "name": "DELETE Hapus Dokter",
+              "request": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{yii_url}}/master/dokter/3",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "dokter", "3"]
+                }
+              }
+            },
+            {
+              "name": "GET List Jadwal Dokter",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{yii_url}}/master/jadwal-dokter",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "jadwal-dokter"]
+                }
+              }
+            },
+            {
+              "name": "POST Tambah Jadwal Dokter",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dokter_id\": 1,\n  \"hari\": \"Jumat\",\n  \"jam_mulai\": \"08:00:00\",\n  \"jam_selesai\": \"12:00:00\",\n  \"kuota_harian\": 20\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/jadwal-dokter",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "jadwal-dokter"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Tindakan Medis & Lab",
+          "item": [
+            {
+              "name": "GET List Tindakan & Lab",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{yii_url}}/master/tindakan-medis",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "tindakan-medis"]
+                }
+              }
+            },
+            {
+              "name": "POST Tambah Tindakan / Lab",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kode_tindakan\": \"TND-004\",\n  \"nama_tindakan\": \"Pemeriksaan EKG Jantung\",\n  \"kategori\": \"POLIKLINIK\",\n  \"tarif\": 150000\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/tindakan-medis",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "tindakan-medis"]
+                }
+              }
+            },
+            {
+              "name": "PUT Update Tarif Tindakan",
+              "request": {
+                "method": "PUT",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tarif\": 165000\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/tindakan-medis/7",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "tindakan-medis", "7"]
+                }
+              }
+            },
+            {
+              "name": "DELETE Hapus Tindakan",
+              "request": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{yii_url}}/master/tindakan-medis/7",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "tindakan-medis", "7"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Obat & Stok",
+          "item": [
+            {
+              "name": "GET List Obat",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{yii_url}}/master/obat",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "obat"]
+                }
+              }
+            },
+            {
+              "name": "POST Tambah Obat",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kode_obat\": \"OBT-006\",\n  \"nama_obat\": \"Cetirizine 10 mg\",\n  \"satuan\": \"Strip (10 Tab)\",\n  \"stok\": 120,\n  \"harga_satuan\": 12000\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/obat",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "obat"]
+                }
+              }
+            },
+            {
+              "name": "PUT Update Stok & Harga Obat",
+              "request": {
+                "method": "PUT",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stok\": 150,\n  \"harga_satuan\": 12500\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/obat/6",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "obat", "6"]
+                }
+              }
+            },
+            {
+              "name": "DELETE Hapus Obat",
+              "request": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{yii_url}}/master/obat/6",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "obat", "6"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Manajemen User (Admin Only)",
+          "item": [
+            {
+              "name": "GET List Users",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{yii_url}}/master/users",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "users"]
+                }
+              }
+            },
+            {
+              "name": "POST Tambah User Baru",
+              "request": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"kasir2\",\n  \"password\": \"password123\",\n  \"nama_lengkap\": \"Budi Kasir Malam\",\n  \"role\": \"KASIR\",\n  \"is_active\": true\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/users",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "users"]
+                }
+              }
+            },
+            {
+              "name": "PUT Update User",
+              "request": {
+                "method": "PUT",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nama_lengkap\": \"Budi Kasir Shift 2\",\n  \"is_active\": true\n}"
+                },
+                "url": {
+                  "raw": "{{yii_url}}/master/users/8",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "users", "8"]
+                }
+              }
+            },
+            {
+              "name": "DELETE Hapus User",
+              "request": {
+                "method": "DELETE",
+                "url": {
+                  "raw": "{{yii_url}}/master/users/8",
+                  "host": ["{{yii_url}}"],
+                  "path": ["master", "users", "8"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "03. Pendaftaran & Antrean",
+      "item": [
+        {
+          "name": "GET List Antrean Kunjungan",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{yii_url}}/pendaftaran?tanggal=ALL",
+              "host": ["{{yii_url}}"],
+              "path": ["pendaftaran"],
+              "query": [{ "key": "tanggal", "value": "ALL" }]
+            }
+          }
+        },
+        {
+          "name": "POST Daftar Kunjungan (Pasien Lama)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipe_pasien\": \"LAMA\",\n  \"pasien_id\": 1,\n  \"poli_id\": 2,\n  \"dokter_id\": 1,\n  \"tanggal_kunjungan\": \"2026-11-15\"\n}"
+            },
+            "url": {
+              "raw": "{{yii_url}}/pendaftaran",
+              "host": ["{{yii_url}}"],
+              "path": ["pendaftaran"]
+            }
+          }
+        },
+        {
+          "name": "POST Daftar Kunjungan (Pasien Baru Otomatis No. RM)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipe_pasien\": \"BARU\",\n  \"nik\": \"3273012204980005\",\n  \"nama_lengkap\": \"Siti Rahmawati\",\n  \"tanggal_lahir\": \"1998-04-22\",\n  \"jenis_kelamin\": \"P\",\n  \"no_telepon\": \"081322445566\",\n  \"alamat\": \"Jl. Buah Batu No. 88, Bandung\",\n  \"poli_id\": 2,\n  \"dokter_id\": 1,\n  \"tanggal_kunjungan\": \"2026-11-15\"\n}"
+            },
+            "url": {
+              "raw": "{{yii_url}}/pendaftaran",
+              "host": ["{{yii_url}}"],
+              "path": ["pendaftaran"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04. Pemeriksaan Medis (EMR)",
+      "item": [
+        {
+          "name": "GET Detail Pemeriksaan & Riwayat Pasien",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{yii_url}}/pemeriksaan/1",
+              "host": ["{{yii_url}}"],
+              "path": ["pemeriksaan", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST Simpan EMR, Tindakan, Order Lab & Resep",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"keluhan_utama\": \"Demam tinggi 3 hari dan nyeri ulu hati\",\n  \"anamnesis\": \"Pasien mengeluhkan demam naik turun sejak 3 hari lalu disertai mual.\",\n  \"tekanan_darah\": \"120/80\",\n  \"nadi\": 84,\n  \"suhu_tubuh\": 38.2,\n  \"pemeriksaan_fisik\": \"Nyeri tekan epigastrium (+)\",\n  \"diagnosis_utama\": \"Observasi Febris + Dispepsia\",\n  \"catatan_dokter\": \"Istirahat cukup dan perbanyak minum air putih\",\n  \"tindakan\": [\n    { \"tindakan_id\": 1, \"jumlah\": 1 }\n  ],\n  \"lab_orders\": [\n    { \"tindakan_id\": 4, \"catatan_permintaan\": \"Cek trombosit dan leukosit\" }\n  ],\n  \"resep\": [\n    { \"obat_id\": 1, \"dosis\": \"500 mg\", \"frekuensi\": \"3x1 sesudah makan\", \"jumlah\": 1 },\n    { \"obat_id\": 3, \"dosis\": \"20 mg\", \"frekuensi\": \"2x1 sebelum makan\", \"jumlah\": 1 }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{yii_url}}/pemeriksaan/1",
+              "host": ["{{yii_url}}"],
+              "path": ["pemeriksaan", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05. Laboratorium (Node.js)",
+      "item": [
+        {
+          "name": "GET List Permintaan & Hasil Lab",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{node_url}}/lab",
+              "host": ["{{node_url}}"],
+              "path": ["lab"]
+            }
+          }
+        },
+        {
+          "name": "PUT Input Hasil Pemeriksaan Lab",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hasil_pemeriksaan\": \"Hb: 13.8 g/dL, Leukosit: 11.200 /uL, Trombosit: 210.000 /uL\",\n  \"nilai_rujukan\": \"Hb: 13-17 | Leukosit: 4.000-10.000 | Trombosit: 150.000-450.000\"\n}"
+            },
+            "url": {
+              "raw": "{{node_url}}/lab/1/hasil",
+              "host": ["{{node_url}}"],
+              "path": ["lab", "1", "hasil"]
+            }
+          }
+        },
+        {
+          "name": "POST Sync Outbox Tertunda (Skenario D.5)",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{node_url}}/lab/sync-outbox",
+              "host": ["{{node_url}}"],
+              "path": ["lab", "sync-outbox"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "06. Farmasi & Resep",
+      "item": [
+        {
+          "name": "GET List Antrean Resep",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{yii_url}}/farmasi",
+              "host": ["{{yii_url}}"],
+              "path": ["farmasi"]
+            }
+          }
+        },
+        {
+          "name": "POST Serahkan Obat & Potong Stok (Skenario D.2)",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{yii_url}}/farmasi/1/serahkan",
+              "host": ["{{yii_url}}"],
+              "path": ["farmasi", "1", "serahkan"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "07. Kasir & Billing",
+      "item": [
+        {
+          "name": "GET List Tagihan Pasien",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{yii_url}}/billing",
+              "host": ["{{yii_url}}"],
+              "path": ["billing"]
+            }
+          }
+        },
+        {
+          "name": "GET Detail Rincian Invoice",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{yii_url}}/billing/1",
+              "host": ["{{yii_url}}"],
+              "path": ["billing", "1"]
+            }
+          }
+        },
+        {
+          "name": "POST Proses Pembayaran Idempotent (Skenario D.3)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idempotency_key\": \"PAY-INV1-UNIQUE-KEY-001\",\n  \"metode_pembayaran\": \"TUNAI\",\n  \"jumlah_bayar\": 290000\n}"
+            },
+            "url": {
+              "raw": "{{yii_url}}/billing/1/bayar",
+              "host": ["{{yii_url}}"],
+              "path": ["billing", "1", "bayar"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "08. Dashboard & Laporan (Node.js)",
+      "item": [
+        {
+          "name": "GET Health Check Service & DB",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": {
+              "raw": "{{node_url}}/health",
+              "host": ["{{node_url}}"],
+              "path": ["health"]
+            }
+          }
+        },
+        {
+          "name": "GET API Documentation Endpoint",
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "GET",
+            "url": {
+              "raw": "{{node_url}}/docs",
+              "host": ["{{node_url}}"],
+              "path": ["docs"]
+            }
+          }
+        },
+        {
+          "name": "GET Dashboard Agregasi Operasional",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{node_url}}/dashboard?start_date=2026-11-15&end_date=2026-11-15",
+              "host": ["{{node_url}}"],
+              "path": ["dashboard"],
+              "query": [
+                { "key": "start_date", "value": "2026-11-15" },
+                { "key": "end_date", "value": "2026-11-15" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
